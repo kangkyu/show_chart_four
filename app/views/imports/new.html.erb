@@ -1,0 +1,9 @@
+<%= form_for :import, url: imports_path do |f| %>
+  <%= f.file_field :file %>
+  <%= f.submit %>
+<% end %>
+
+<%= line_chart @import if @import %>
+
+<hr />
+<%= params %>
