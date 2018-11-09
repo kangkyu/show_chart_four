@@ -3,7 +3,4 @@
   <%= f.submit %>
 <% end %>
 
-<%= line_chart @import if @import %>
-
-<hr />
-<%= params %>
+<%= line_chart @import, library: {backgroundColor: "#1f1f24"} if @import %>

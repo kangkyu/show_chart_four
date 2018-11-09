@@ -6,9 +6,17 @@ class ImportsController < ApplicationController
   end
 
   def create
-    file = params.require(:import).permit!["file"]
-    @import = CSV.read(file.tempfile).to_h
-    render new_import_path
+    if params.key?(:import)
+      file = params.require(:import).permit!["file"]
+      a = CSV.read(file.tempfile).transpose
+      @import = []
+      (a.size - 1).times do |i|
+        @import << { name: (65 + i).chr, data: a[0].zip(a[1 + i]).to_h }
+      end
+      render new_import_path
+    else
+      redirect_to new_import_url
+    end
   end
 
   def index
